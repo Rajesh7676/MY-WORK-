@@ -1,0 +1,258 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.dash{padding:1rem 0;font-family:var(--font-sans)}
+.metrics-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:1.25rem}
+.mc{border-radius:var(--border-radius-md);padding:.85rem 1rem}
+.mc-blue{background:#E6F1FB}.mc-teal{background:#E1F5EE}.mc-amber{background:#FAEEDA}.mc-purple{background:#EEEDFE}
+.mc-label{font-size:11px;color:#185FA5;margin-bottom:3px}.mc-teal .mc-label{color:#0F6E56}.mc-amber .mc-label{color:#854F0B}.mc-purple .mc-label{color:#534AB7}
+.mc-val{font-size:24px;font-weight:500;color:#0C447C}.mc-teal .mc-val{color:#085041}.mc-amber .mc-val{color:#633806}.mc-purple .mc-val{color:#3C3489}
+.mc-sub{font-size:11px;margin-top:1px;color:#185FA5}.mc-teal .mc-sub{color:#0F6E56}.mc-amber .mc-sub{color:#854F0B}.mc-purple .mc-sub{color:#534AB7}
+
+.proj-banner{border-radius:var(--border-radius-lg);border:1.5px solid #534AB7;background:#EEEDFE;padding:1rem 1.25rem;margin-bottom:1.25rem}
+.proj-banner-top{display:flex;align-items:center;gap:10px;margin-bottom:.75rem}
+.proj-icon{width:36px;height:36px;border-radius:50%;background:#534AB7;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.proj-icon svg{width:18px;height:18px;fill:#fff}
+.proj-title{font-size:15px;font-weight:500;color:#3C3489}
+.proj-sub{font-size:12px;color:#534AB7;margin-top:1px}
+.proj-pillars{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:.85rem}
+.pillar{background:#fff;border-radius:var(--border-radius-md);padding:.6rem .85rem;border:0.5px solid #AFA9EC;display:flex;align-items:flex-start;gap:8px}
+.pillar-dot{width:8px;height:8px;border-radius:50%;background:#534AB7;margin-top:4px;flex-shrink:0}
+.pillar-text{font-size:12px;color:#3C3489;line-height:1.5}
+.ds-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:.25rem}
+.ds-card{background:#fff;border-radius:var(--border-radius-md);padding:.65rem .85rem;border:0.5px solid #AFA9EC}
+.ds-num{font-size:11px;font-weight:500;color:#534AB7;margin-bottom:3px}
+.ds-name{font-size:12px;font-weight:500;color:#3C3489;margin-bottom:3px}
+.ds-desc{font-size:11px;color:#534AB7;line-height:1.4}
+.ds-year{display:inline-block;background:#EEEDFE;color:#534AB7;font-size:10px;padding:1px 7px;border-radius:20px;margin-top:4px;border:0.5px solid #AFA9EC}
+
+.toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:1.25rem;padding:.85rem 1rem;background:var(--color-background-secondary);border-radius:var(--border-radius-lg);border:0.5px solid var(--color-border-tertiary)}
+.srch{flex:1;min-width:160px}
+.srch input{width:100%;padding:6px 11px;font-size:13px;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);background:var(--color-background-primary);color:var(--color-text-primary);outline:none}
+.srch input:focus{border-color:#378ADD}
+.fbtns{display:flex;gap:6px;flex-wrap:wrap}
+.fb{padding:4px 11px;font-size:12px;border-radius:20px;border:1.5px solid transparent;background:transparent;color:var(--color-text-secondary);cursor:pointer;transition:all .15s;font-family:var(--font-sans)}
+.fb.fa-All{border-color:#888780;color:#5F5E5A}.fb.fa-All.on{background:#888780;color:#fff}
+.fb.fa-Survey{border-color:#534AB7;color:#534AB7}.fb.fa-Survey.on{background:#534AB7;color:#fff}
+.fb.fa-SLR{border-color:#0F6E56;color:#0F6E56}.fb.fa-SLR.on{background:#0F6E56;color:#fff}
+.fb.fa-Mapping{border-color:#854F0B;color:#854F0B}.fb.fa-Mapping.on{background:#854F0B;color:#fff}
+.fb.fa-Original{border-color:#993C1D;color:#993C1D}.fb.fa-Original.on{background:#993C1D;color:#fff}
+
+.charts-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.25rem}
+.cc{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem}
+.cc-title{font-size:12px;font-weight:500;color:var(--color-text-secondary);margin-bottom:.75rem;text-transform:uppercase;letter-spacing:.06em}
+.bar-row{display:flex;align-items:center;gap:8px;margin-bottom:5px}
+.bar-name{font-size:12px;color:var(--color-text-secondary);width:90px;flex-shrink:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bar-track{flex:1;height:9px;background:var(--color-background-secondary);border-radius:5px;overflow:hidden}
+.bar-fill{height:100%;border-radius:5px;transition:width .45s}
+.bar-n{font-size:11px;color:var(--color-text-tertiary);min-width:14px;text-align:right}
+
+.papers-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem}
+.papers-hdr-title{font-size:14px;font-weight:500;color:var(--color-text-primary)}
+.count-pill{font-size:12px;color:var(--color-text-secondary);background:var(--color-background-secondary);padding:3px 10px;border-radius:20px}
+.pc{border-radius:var(--border-radius-lg);margin-bottom:.75rem;overflow:hidden;border:1.5px solid transparent;transition:border-color .15s;cursor:pointer}
+.pc:hover{border-color:#B5D4F4}
+.pc.open{border-color:#378ADD}
+.pc-header{padding:.9rem 1rem;display:flex;align-items:flex-start;gap:12px;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg)}
+.pc.open .pc-header{border-bottom-left-radius:0;border-bottom-right-radius:0;border-bottom-color:transparent}
+.pid{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;flex-shrink:0}
+.pid-survey{background:#EEEDFE;color:#3C3489}.pid-slr{background:#E1F5EE;color:#085041}.pid-mapping{background:#FAEEDA;color:#633806}.pid-original{background:#FAECE7;color:#712B13}
+.pc-meta{flex:1;min-width:0}
+.pc-toprow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:3px}
+.pc-auth{font-size:14px;font-weight:500;color:var(--color-text-primary)}
+.tbadge{font-size:11px;padding:2px 9px;border-radius:20px;white-space:nowrap;font-weight:500}
+.tb-survey{background:#EEEDFE;color:#3C3489}.tb-slr{background:#E1F5EE;color:#085041}.tb-mapping{background:#FAEEDA;color:#633806}.tb-original{background:#FAECE7;color:#712B13}
+.pc-obj{font-size:12px;color:var(--color-text-secondary);line-height:1.5}
+.pc-chevron{margin-left:auto;font-size:16px;color:var(--color-text-tertiary);flex-shrink:0;transition:transform .2s}
+.pc.open .pc-chevron{transform:rotate(180deg)}
+.pc-body{display:none;background:var(--color-background-primary);border:0.5px solid #378ADD;border-top:none;border-bottom-left-radius:var(--border-radius-lg);border-bottom-right-radius:var(--border-radius-lg);padding:1rem}
+.pc.open .pc-body{display:block}
+.tabs{display:flex;gap:4px;margin-bottom:.85rem;flex-wrap:wrap}
+.tab{padding:4px 12px;font-size:12px;border-radius:20px;border:1px solid var(--color-border-secondary);background:transparent;color:var(--color-text-secondary);cursor:pointer;font-family:var(--font-sans);transition:all .15s}
+.tab.on{background:#185FA5;color:#fff;border-color:#185FA5}
+.tab-content{display:none}.tab-content.on{display:block}
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.dl{font-size:11px;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px}
+.dv{font-size:12px;color:var(--color-text-secondary);line-height:1.5}
+.lim-chip{display:inline-block;background:#FCEBEB;color:#791F1F;font-size:11px;padding:2px 9px;border-radius:4px;margin-top:5px}
+.sol-box{background:#EEEDFE;border-radius:var(--border-radius-md);padding:.75rem 1rem;margin-top:.5rem}
+.sol-title{font-size:11px;font-weight:500;color:#3C3489;text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px}
+.sol-text{font-size:12px;color:#534AB7;line-height:1.6}
+.rel-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:.5rem}
+.rel-tag{font-size:11px;background:#E6F1FB;color:#185FA5;padding:2px 8px;border-radius:20px}
+.ask-btn{margin-top:.85rem;padding:6px 14px;font-size:12px;border:1px solid #185FA5;border-radius:20px;background:transparent;color:#185FA5;cursor:pointer;font-family:var(--font-sans)}
+.ask-btn:hover{background:#E6F1FB}
+.no-res{text-align:center;padding:2.5rem;color:var(--color-text-secondary);font-size:14px}
+</style>
+
+<div class="dash">
+
+<div class="metrics-row" id="mrow"></div>
+
+<div class="proj-banner">
+  <div class="proj-banner-top">
+    <div class="proj-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg></div>
+    <div><div class="proj-title">Proposed solution</div><div class="proj-sub">AI + NLP framework for automated student feedback analysis</div></div>
+  </div>
+  <div class="proj-pillars">
+    <div class="pillar"><div class="pillar-dot"></div><div class="pillar-text">Use AI & NLP to analyze student feedback automatically at scale</div></div>
+    <div class="pillar"><div class="pillar-dot"></div><div class="pillar-text">Perform real-time sentiment analysis and pattern detection</div></div>
+    <div class="pillar"><div class="pillar-dot"></div><div class="pillar-text">Identify learning issues and negative trends at an early stage</div></div>
+    <div class="pillar"><div class="pillar-dot"></div><div class="pillar-text">Provide actionable insights to educators and administrators</div></div>
+  </div>
+  <div class="dl" style="color:#534AB7;margin-bottom:6px">Datasets used</div>
+  <div class="ds-row">
+    <div class="ds-card">
+      <div class="ds-num">Dataset 1</div>
+      <div class="ds-name">Waterloo Course Reviews</div>
+      <div class="ds-desc">Structured and textual course feedback from university students</div>
+      <span class="ds-year">2022</span>
+    </div>
+    <div class="ds-card">
+      <div class="ds-num">Dataset 2</div>
+      <div class="ds-name">RateMyProfessor</div>
+      <div class="ds-desc">Student opinions on teaching quality and instructor performance</div>
+      <span class="ds-year">2020</span>
+    </div>
+    <div class="ds-card">
+      <div class="ds-num">Dataset 3</div>
+      <div class="ds-name">Univ. of Exeter Reviews</div>
+      <div class="ds-desc">Modern student feedback reflecting current academic environments</div>
+      <span class="ds-year">2023</span>
+    </div>
+  </div>
+</div>
+
+<div class="toolbar">
+  <div class="srch"><input id="si" placeholder="Search papers, methods, datasets, authors..." oninput="onSearch()"></div>
+  <div class="fbtns" id="fbtns"></div>
+</div>
+
+<div class="charts-row">
+  <div class="cc"><div class="cc-title">Models & techniques frequency</div><div id="techbars"></div></div>
+  <div class="cc"><div class="cc-title">Papers by year & type</div><div id="yearbars"></div></div>
+</div>
+
+<div class="papers-hdr"><span class="papers-hdr-title">Papers</span><span class="count-pill" id="cpill">8 papers</span></div>
+<div id="plist"></div>
+</div>
+
+<script>
+const PAPERS=[
+  {id:'P1',authors:'Shaik et al.',year:2023,type:'Survey',obj:'Reviews SA & opinion mining in education across 4 levels (document, sentence, entity, aspect). Examines annotation techniques and AI methodologies.',dataset:'150+ reviewed studies; Coursera reviews, SFU corpus, Amazon edu datasets, Twitter edu feedback.',models:'SVM, Random Forest, Naive Bayes, XGBoost, CNN, LSTM, BiLSTM, BERT, RoBERTa, Transformer ensembles',accuracy:'RF: F1=98.01% & 99.43% (aspect); ABSA Acc=80.67%; Twitter edu Acc=96.99%',limitations:'No new model proposed. Annotation tools not adapted to educational language. Multilingual SA unexplored.',future:'Education-specific annotation tools & lexicons. Real-time feedback pipelines. Multilingual SA.',solution:'Develop education-specific NLP annotation toolkits and lexicons. Build transformer-based pipelines pre-trained on academic corpora to address the gap in multilingual and domain-specific SA.',related:'P4,P7,P8'},
+  {id:'P2',authors:'Kastrati et al.',year:2021,type:'Mapping',obj:'Maps NLP/DL/ML research (2015–2020) on student feedback SA in learning platforms using PRISMA framework.',dataset:'92 primary studies from 612 results across IEEE Xplore, ACM, Springer, Elsevier, Scopus, Web of Science.',models:'NB, SVM, Decision Tree, Logistic Regression, LSTM, CNN, GRU, BERT, hybrid combinations',accuracy:'Best: Acc=98.29%, F1=96%. Typical: F1=83–88%, Precision~90%, Recall~78%',limitations:'No model or experiment proposed. No standardised datasets. Emotional detection underdeveloped.',future:'Full SLRs from mapping themes. Standardised shared datasets. Emotional detection focus.',solution:'Create a standardised, open-access benchmark dataset for student feedback SA. Propose shared task competitions (e.g., SemEval-style) focused on educational NLP to accelerate reproducible research.',related:'P3,P6,P4'},
+  {id:'P3',authors:'Dalipi et al.',year:2022,type:'SLR',obj:'Reviews SA techniques on MOOC platforms (Coursera, edX, Udemy), examining how student feedback has been processed.',dataset:'PRISMA SLR; Coursera, edX, Udemy reviews, MOOC comment corpora. English-language only.',models:'SVM (dominant), Decision Tree, CNN, LSTM, BERT, LDA for topic modelling',accuracy:'SVM: F1>80%; Coursera ABSA: F1=86.13%; LDA negative topic precision: 85.71%',limitations:'English-only inclusion. No cross-platform comparison. No real-time feedback analysis.',future:'Multilingual MOOC SA. Longitudinal learner behaviour. Real-time feedback loops.',solution:'Build multilingual transformer pipelines (mBERT, XLM-R) for MOOC platforms. Implement real-time streaming SA integrated with MOOC APIs to deliver instant instructor dashboards.',related:'P4,P7,P8'},
+  {id:'P4',authors:'Abdi et al.',year:2023,type:'Original',obj:'Proposes DTLP – a novel BiLSTM + linguistic knowledge model for fine-grained ABSA of student feedback in intelligent edu systems.',dataset:'Custom student survey dataset (course quality, teaching, assignments) + existing benchmark. Manually annotated.',models:'DTLP (BiLSTM + POS, negation, LDA), CNN, SVM, Random Forest, BERT baselines',accuracy:'DTLP: Acc=88.78%, F1=83.27%; CNN: Acc=71.43%; SVM: Acc=86.01%',limitations:'Negation & discourse markers problematic. Domain-specific dataset limits generalisation.',future:'Larger diverse datasets. Transfer learning for cross-institutional use. Real-time monitoring.',solution:'Extend DTLP with negation-aware attention mechanism and cross-institutional transfer learning. Augment training with synthetic data via LLM paraphrasing to improve generalisation.',related:'P7,P8'},
+  {id:'P5',authors:'Hua et al.',year:2024,type:'SLR',obj:'Largest SLR of ABSA research to date – tracks trends across domains, datasets, and solution paradigms over ~20 years.',dataset:'727 studies from 8,550 results; SemEval, Yelp, Amazon, MAMS, Twitter.',models:'SVM → LSTM/BiLSTM/GRU/CNN → BERT/RoBERTa/XLNet → GPT-3.5/4, Llama-2, Flan-T5, DeBERTa, PaLM',accuracy:'Fine-tuned RoBERTa > GPT-3.5 & GPT-4 by ~20% on AE & ASC. GPT-3.5 > GPT-4 on opinion extraction by ~15%.',limitations:'Heavy SemEval bias. Education domain underrepresented. Inconsistent LLM benchmarking.',future:'Diversify ABSA to education & healthcare. Multilingual ABSA datasets. Standardised LLM benchmarking.',solution:'Create EduABSA: a dedicated education-domain ABSA benchmark. Establish standardised LLM evaluation protocols with fixed prompts and multi-run averaging for reproducibility.',related:'P7,P8'},
+  {id:'P6',authors:'Grimalt-Álvaro & Usart',year:2024,type:'SLR',obj:'Reviews SA applied to formative assessment in higher education – covering techniques, visualisation tools & pedagogical frameworks.',dataset:'PRISMA SLR (2010–2022); HE discussion forums, teacher evaluation forms, peer assessment.',models:'SVM, VADER, SentiStrength (lexicon-based), BERT, hybrid rule-based + ML',accuracy:'Accuracy improves with emotional features. Human raters improve annotation validity.',limitations:'Scarce student messages limit training. SA not adapted to academic language. No teacher visualisation tools.',future:'Emotional state modelling. Teacher dashboard development. Peer & self-assessment SA.',solution:'Design an educator-facing NLP dashboard integrating emotional state detection (arousal/valence) with visualisation. Co-develop with teachers using participatory design for pedagogical utility.',related:'P7,P8'},
+  {id:'P7',authors:'Deshpande et al.',year:2025,type:'Original',obj:'Applies and compares ML classifiers on faculty feedback (student evaluations of teaching staff) to identify best-performing model.',dataset:'Faculty evaluation forms from educational institutions. NLP + POS tagging preprocessing.',models:'Random Forest (best), SVM, Naive Bayes, Decision Tree, MLP, SGD. BERT & RoBERTa as future.',accuracy:'RF: Acc=91%, Precision=94%, Recall=85%, F1=89%',limitations:'Traditional ML lacks contextual depth. Institution-specific data limits generalisation.',future:'Fine-tune BERT, RoBERTa, EduBERT. Severity detection. Real-time AI feedback.',solution:'Fine-tune domain-adapted transformers (EduBERT) on multi-institutional faculty evaluation corpora. Add a severity classification layer to flag critical feedback and prioritise institutional action.',related:'P4,P5,P8'},
+  {id:'P8',authors:'Morris et al.',year:2025,type:'Original',obj:'Fine-tunes RoBERTa & Longformer in iTELL intelligent textbook to auto-score student summaries and deliver real-time formative feedback.',dataset:'4,690 summaries from 3 HE institutions (2018–2021); 101 source texts.',models:'RoBERTa (fine-tuned), Longformer (fine-tuned), PCA vs ROUGE, BLEU, sentence-embedding baselines.',accuracy:'Content model robust out-of-domain. Pearson r=0.78–0.81 vs human raters. PCA: 82% variance.',limitations:'Wording model not robust out-of-domain. No XAI. Limited to textbook summarisation.',future:'Explainable AI (XAI) for scoring. Expand to other writing/learning contexts.',solution:'Integrate SHAP or LIME-based XAI explanations into the scoring pipeline so students understand why feedback is given. Extend model to essays and open-ended questions beyond summarisation tasks.',related:'P2,P3,P6'}
+];
+
+const TYPE_KEY={Survey:'Survey Paper',Mapping:'Systematic Mapping Study',SLR:'Systematic Literature Review',Original:'Original Research'};
+const TYPE_COLOR={Survey:'survey',Mapping:'mapping',SLR:'slr',Original:'original'};
+const TECH_COLORS=['#378ADD','#1D9E75','#7F77DD','#D85A30','#BA7517','#D4537E','#639922','#E24B4A'];
+const YR_COLORS={Survey:'#7F77DD',Mapping:'#EF9F27',SLR:'#1D9E75',Original:'#D85A30'};
+
+let activeFilter='All',searchTerm='',openId=null,openTab={};
+
+function filtered(){
+  let d=PAPERS;
+  if(activeFilter!=='All') d=d.filter(p=>p.type===activeFilter);
+  if(searchTerm){const s=searchTerm.toLowerCase();d=d.filter(p=>[p.authors,p.obj,p.models,p.dataset,p.accuracy,String(p.year)].some(f=>f.toLowerCase().includes(s)));}
+  return d;
+}
+
+function renderMetrics(){
+  const d=filtered();const types=[...new Set(d.map(p=>p.type))];const yrs=[...new Set(d.map(p=>p.year))].sort();
+  document.getElementById('mrow').innerHTML=`
+    <div class="mc mc-blue"><div class="mc-label">Total papers</div><div class="mc-val">${d.length}</div><div class="mc-sub">in selection</div></div>
+    <div class="mc mc-teal"><div class="mc-label">Paper types</div><div class="mc-val">${types.length}</div><div class="mc-sub">distinct kinds</div></div>
+    <div class="mc mc-amber"><div class="mc-label">Year range</div><div class="mc-val">${yrs.length?yrs[0]+'–'+yrs[yrs.length-1]:'—'}</div><div class="mc-sub">${yrs.length} years</div></div>
+    <div class="mc mc-purple"><div class="mc-label">Empirical papers</div><div class="mc-val">${d.filter(p=>p.type==='Original').length}</div><div class="mc-sub">original research</div></div>`;
+}
+
+function renderFilters(){
+  const map={All:'All',Survey:'Survey',SLR:'SLR',Mapping:'Mapping',Original:'Original'};
+  document.getElementById('fbtns').innerHTML=Object.entries(map).map(([k,label])=>`<button class="fb fa-${k}${activeFilter===k?' on':''}" onclick="setFilter('${k}')">${label}</button>`).join('');
+}
+
+function setFilter(f){activeFilter=f;renderAll();}
+function onSearch(){searchTerm=document.getElementById('si').value;renderAll();}
+
+function renderCharts(){
+  const d=filtered();
+  const techs=['BERT','SVM','LSTM','Random Forest','CNN','BiLSTM','RoBERTa','Transformer','LDA','Naive Bayes'];
+  const tc=techs.map(t=>({name:t,n:d.filter(p=>p.models.toLowerCase().includes(t.toLowerCase())).length})).filter(x=>x.n>0).sort((a,b)=>b.n-a.n).slice(0,8);
+  const maxT=tc[0]?.n||1;
+  document.getElementById('techbars').innerHTML=tc.map((t,i)=>`<div class="bar-row"><span class="bar-name">${t.name}</span><div class="bar-track"><div class="bar-fill" style="width:${Math.round(t.n/maxT*100)}%;background:${TECH_COLORS[i%TECH_COLORS.length]}"></div></div><span class="bar-n">${t.n}</span></div>`).join('');
+  const yc={};d.forEach(p=>{if(!yc[p.year])yc[p.year]={};yc[p.year][p.type]=(yc[p.year][p.type]||0)+1;});
+  const ys=Object.entries(yc).sort((a,b)=>a[0]-b[0]);
+  const maxY=Math.max(...ys.map(([,v])=>Object.values(v).reduce((a,b)=>a+b,0)),1);
+  document.getElementById('yearbars').innerHTML=ys.map(([yr,tv])=>{
+    const total=Object.values(tv).reduce((a,b)=>a+b,0);
+    const segs=Object.entries(tv).map(([t,n])=>`<div style="height:100%;width:${Math.round(n/maxY*100)}%;background:${YR_COLORS[t]||'#888'};flex-shrink:0"></div>`).join('');
+    return `<div class="bar-row"><span class="bar-name">${yr}</span><div class="bar-track" style="display:flex;overflow:visible">${segs}</div><span class="bar-n">${total}</span></div>`;
+  }).join('')+`<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px">${Object.entries(YR_COLORS).map(([t,c])=>`<span style="display:flex;align-items:center;gap:4px;font-size:11px;color:var(--color-text-secondary)"><span style="width:9px;height:9px;border-radius:2px;background:${c};display:inline-block"></span>${t}</span>`).join('')}</div>`;
+}
+
+function pidClass(t){return 'pid-'+TYPE_COLOR[t]}
+function tbClass(t){return 'tb-'+TYPE_COLOR[t]}
+
+function renderPapers(){
+  const d=filtered();
+  document.getElementById('cpill').textContent=`${d.length} paper${d.length!==1?'s':''}`;
+  if(!d.length){document.getElementById('plist').innerHTML='<div class="no-res">No papers match your search or filter</div>';return;}
+  document.getElementById('plist').innerHTML=d.map(p=>{
+    const isOpen=openId===p.id;const tab=openTab[p.id]||'overview';
+    return `<div class="pc${isOpen?' open':''}" id="pc-${p.id}">
+      <div class="pc-header" onclick="toggleCard('${p.id}')">
+        <div class="pid ${pidClass(p.type)}">${p.id}</div>
+        <div class="pc-meta">
+          <div class="pc-toprow">
+            <span class="pc-auth">${p.authors} · ${p.year}</span>
+            <span class="tbadge ${tbClass(p.type)}">${TYPE_KEY[p.type]}</span>
+          </div>
+          <div class="pc-obj">${p.obj}</div>
+        </div>
+        <span class="pc-chevron">&#8964;</span>
+      </div>
+      ${isOpen?`<div class="pc-body">
+        <div class="tabs">
+          <button class="tab${tab==='overview'?' on':''}" onclick="setTab('${p.id}','overview',event)">Overview</button>
+          <button class="tab${tab==='results'?' on':''}" onclick="setTab('${p.id}','results',event)">Results</button>
+          <button class="tab${tab==='limitations'?' on':''}" onclick="setTab('${p.id}','limitations',event)">Limitations</button>
+          <button class="tab${tab==='solution'?' on':''}" onclick="setTab('${p.id}','solution',event)">Proposed solution</button>
+        </div>
+        <div class="tab-content${tab==='overview'?' on':''}">
+          <div class="detail-grid">
+            <div><div class="dl">Dataset</div><div class="dv">${p.dataset}</div></div>
+            <div><div class="dl">Models & techniques</div><div class="dv">${p.models}</div></div>
+            <div style="grid-column:1/-1"><div class="dl">Related papers</div><div class="rel-tags">${p.related.split(',').map(r=>`<span class="rel-tag">${r.trim()}</span>`).join('')}</div></div>
+          </div>
+        </div>
+        <div class="tab-content${tab==='results'?' on':''}">
+          <div class="dl">Key results</div><div class="dv" style="margin-bottom:6px">${p.accuracy}</div>
+          <div class="dl" style="margin-top:.5rem">Future work</div><div class="dv">${p.future}</div>
+        </div>
+        <div class="tab-content${tab==='limitations'?' on':''}">
+          <div class="dl">Limitations identified</div><div class="dv">${p.limitations}</div>
+          <span class="lim-chip">Gap identified</span>
+        </div>
+        <div class="tab-content${tab==='solution'?' on':''}">
+          <div class="sol-box">
+            <div class="sol-title">Proposed solution</div>
+            <div class="sol-text">${p.solution}</div>
+          </div>
+          <button class="ask-btn" onclick="sendPrompt('Tell me more about the proposed solution for ${p.id} by ${p.authors}')">Ask Claude about this solution ↗</button>
+        </div>
+      </div>`:''}
+    </div>`;
+  }).join('');
+}
+
+function toggleCard(id){openId=openId===id?null:id;if(openId&&!openTab[id])openTab[id]='overview';renderPapers();}
+function setTab(id,tab,e){e.stopPropagation();openTab[id]=tab;renderPapers();}
+function renderAll(){renderMetrics();renderFilters();renderCharts();renderPapers();}
+renderAll();
+</script>
